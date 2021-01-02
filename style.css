@@ -22,6 +22,11 @@
 	margin-bottom: 0px
 }
 
+#footer span.separator {
+	width: 30px;
+	display: inline-block;
+	}
+
 
 button {
 	padding: 10px;
