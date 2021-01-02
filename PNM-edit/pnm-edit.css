@@ -53,6 +53,10 @@
 	color: black;
 	font-size: 20px;
 	padding: 10px;
+
+}
+#analyseArea p {
+
 }
 
 .analyseValue {
@@ -78,7 +82,9 @@
 	height: 100%;
 }
 
-
+#buttonArea {
+	z-index: 3;
+	}
 
 #buttonArea ul {
 	list-style: none;
@@ -91,11 +97,13 @@
 }
 
 #buttonArea ul li.activated > ul { /*Liste aktiviert*/
-	display: block;
+	display: inline-block;
+	position: relative;
 	float: left;
 	list-style: none;
 	background-color: grey;
 	padding: 0px; /*seitliches Padding des Hauptmenüs ausschalten*/
+
 }
 
 
