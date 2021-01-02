@@ -39,9 +39,9 @@
 				}		
 				
 				function exampleClicked() {
-					$(".subMenuButton").toggle();
+					//$(".subMenuButton").toggle();
 					$("#exampleButton").toggleClass("activated");
-					$("#subMenu").toggle();
+					//$("#subMenu").toggle();
 				}
 					
 				function redraw() {
@@ -204,16 +204,29 @@
 					</canvas>
 				</div>
 				<div id="buttonArea">
-					<button id="uploadButton" class="imgButton" title="Datei öffnen" onclick="uploadClicked();"><img src="./open.png"/></button><!--
-					--><input type="file" id="loadFile" name="Datei laden..." onchange="loadFile(this)"/><!--
-					--><button id="downloadButton" class="imgButton" title="Datei speichern/herunterladen" onclick="download();"><img src="./save.png"/></button><!--
-					--><button id="redrawButton" class="imgButton" title="neu zeichnen" onclick="redraw();"><img src="./redraw.png"/></button><!--
-					--><button class="imgButton" onclick="exampleClicked()" title="Beispiele laden" id="exampleButton"><img src="./examples.png"/></button><!--
-					--><div id="subMenu" hidden>
-						<button class="imgButton" onclick="loadExample(1);" class="subMenuButton" hidden><img width=64 src="./example1.png"/></button><!-- 
-					 --><button class="imgButton" onclick="loadExample(2);" class="subMenuButton" hidden><img src="./example2.png"/></button><!--
-					 --><button class="imgButton" onclick="loadExample(3);" class="subMenuButton" hidden><img src="./example3.png"/></button>
+					<input type="file" id="loadFile" name="Datei laden..." hidden onchange="loadFile(this)"/>
+					<ul>
+						<li id="exampleButton"	class="imgButton" onclick="exampleClicked()" title="Beispiele laden" id="exampleButton"><img src="./examples.png"/>
+							<ul id="subMenu" hidden>
+								<li><img onclick="loadExample(1);" src="./example1.png"/></li>
+								<li><img onclick="loadExample(2);" src="./example2.png"/></li>
+								<li><img onclick="loadExample(3);" src="./example3.png"/></li>
+							</ul>
+						</li>
+						<li id="uploadButton" 	class="imgButton" onclick="uploadClicked();" title="Datei öffnen"><img src="./open.png"/></li>
+						<li id="downloadButton" class="imgButton" onclick="download();" 	 title="Datei speichern/herunterladen"><img src="./save.png"/></li>
+						<li id="redrawButton" 	class="imgButton" onclick="redraw();" 		 title="neu zeichnen"><img src="./redraw.png"/></li>
+					</ul>
+					
+					
+					
+					<!--
+					<div><!--
+					<img onclick="loadExample(1);" src="./example1.png"/>
+					    
+					    <img onclick="loadExample(3);" src="./example3.png"/>
 					 </div>
+					 -->
 				</div>
 				<div id="analyseArea" title="Hier werden die ausgelesenen Kopfdaten des Bilds gezeigt.">
 					<p>Format: <span id="analyseFormat" class="analyseValue"></span></p>

@@ -32,16 +32,11 @@ button {
 	border-style: solid;
 	border-width: 3px;
 }
+
 button .bigicon {
 	font-size: 30px;
 }
 
-.imgButton {
-	width: 70px;
-	height: 70px;
-	padding: 0px;
-	
-	}
 
 button:active {
 	border-color: lightblue;
