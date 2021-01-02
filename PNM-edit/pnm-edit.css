@@ -29,16 +29,16 @@
 	background-color: lightgrey;
 	display: block;
 	width: 414px;
-	height: 414px;
-	margin-bottom: 10px;
+	height: 446px;
+	margin-bottom: 5px;
 	border-style: solid;
 	border-width: 3px;
 	border-color: blue;
 }
 
 #drawingCanvas {
-	width: 400px;
-	height: 400px;
+	width: 408px;
+	height: 440px;
 	background-color: lightgrey;
 	border-style: solid;
 	border-width: 3px;
@@ -46,23 +46,17 @@
 }
 
 #analyseArea {
-	height: 194px;
+	height: 180px;
 	border-style: solid;
 	border-width: 3px;
 	border-color: blue;
 	color: black;
 	font-size: 20px;
-	padding: 10px;
-
-}
-#analyseArea p {
+	padding: 5px;
 
 }
 
 .analyseValue {
-	/*display: inline-block;
-	width: 100px;
-	height: 20px;*/
 	background-color: lightblue;
 }
 
@@ -93,19 +87,29 @@
 #buttonArea ul ul {
 	list-style: none;
 	display: none;
-	
 }
 
 #buttonArea ul li.activated > ul { /*Liste aktiviert*/
-	display: inline-block;
+	display: block;
+	width: 216px;
 	position: relative;
+	top: -20px;
+	left: 20px;
 	float: left;
 	list-style: none;
-	background-color: grey;
+	background-color: lightgrey;
 	padding: 0px; /*seitliches Padding des Hauptmenüs ausschalten*/
-
+	border-style: solid;
+	border-width: 3px;
+	border-color: blue;
+	
 }
 
+#buttonArea ul li.activated ul li {
+	display: inline-block;
+	margin: 3px;
+	height: 64px;
+}
 
 
 .imgButton {

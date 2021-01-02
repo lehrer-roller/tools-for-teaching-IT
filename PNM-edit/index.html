@@ -35,13 +35,11 @@
 					$("#textEdit").val(example[ex-1]);	
 					updateAnalyseArea();
 					redraw();	
-					exampleClicked();	
+					
 				}		
 				
 				function exampleClicked() {
-					//$(".subMenuButton").toggle();
 					$("#exampleButton").toggleClass("activated");
-					//$("#subMenu").toggle();
 				}
 					
 				function redraw() {
@@ -200,7 +198,7 @@
 					Portable Anymap Editor
 				</div>
 				<div id="drawingArea">
-					<canvas title="Zeichenfläche, hier wird das Bild dargestellt" id="drawingCanvas" width=400 height=400>
+					<canvas title="Zeichenfläche, hier wird das Bild dargestellt" id="drawingCanvas" width=408 height=440>
 					</canvas>
 				</div>
 				<div id="buttonArea">
@@ -208,9 +206,9 @@
 					<ul>
 						<li id="exampleButton"	class="imgButton" onclick="exampleClicked()" title="Beispiele laden" id="exampleButton"><img src="./examples.png"/>
 							<ul id="subMenu" hidden>
-								<li><img onclick="loadExample(1);" src="./example1.png"/></li>
-								<li><img onclick="loadExample(2);" src="./example2.png"/></li>
-								<li><img onclick="loadExample(3);" src="./example3.png"/></li>
+								<li><img onclick="loadExample(1);" src="./example1.png"/></li><!--
+							 --><li><img onclick="loadExample(2);" src="./example2.png"/></li><!--
+							 --><li><img onclick="loadExample(3);" src="./example3.png"/></li>
 							</ul>
 						</li>
 						<li id="uploadButton" 	class="imgButton" onclick="uploadClicked();" title="Datei öffnen"><img src="./open.png"/></li>
