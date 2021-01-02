@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+	<!--
+	This website / webapp is a simple life editor for PNM-Files. 
+	It has been developed mostly for educational use.
+	Copyright (C) 2020 T. Roller 
+	E-Mail: myLastName@posteo.de
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+	-->
+	<head>
+		<meta charset="utf-8"/>
+		<title>Parity Box</title>
+		<link rel="stylesheet" href="../style.css" type="text/css">
+		<link rel="stylesheet" href="./parity.css" type="text/css">
+
+		<script src="../jquery-3.5.1.min.js"></script>
+		<script>
+			function fieldID(x,y) {
+				return '#field-'+x+'-'+y;
+			}
+			function toggle(x,y, doCheck=true) {
+				$(fieldID(x,y)).toggleClass('black');
+				if (doCheck) {
+					check();
+				}
+			}
+			function mix() {
+				for(y=0; y < 8	; y++) {
+					for( x = 0; x < 8; x++) {
+						$(fieldID(x,y)).removeClass("black");
+					}
+				}
+				for (i=0; i < 200; i++) {
+					toggle(Math.floor(Math.random()*7), Math.floor(Math.random()*7), false)
+				}
+				
+				for(y=0; y < 8	; y++) {
+					count = 0;
+					for( x = 0; x < 7; x++) {
+						if ($(fieldID(x,y)).hasClass("black")) {
+							count++;
+						}
+					}
+					if (count % 2 != 0) {
+						$(fieldID(7,y)).addClass("black");
+					} 
+				}
+					
+				for(x=0; x < 8	; x++) {
+					count = 0;
+					for( y = 0; y < 7; y++) {
+						if ($(fieldID(x,y)).hasClass("black")) {
+							count++;
+						}
+					}
+					if (count % 2 != 0) {
+						$(fieldID(x,7)).addClass("black");
+					} 
+				}
+				check();
+			}
+			function check() {
+				pass = true;
+				for(y=0; y < 8	; y++) {
+					count = 0;
+					for( x = 0; x < 8; x++) {
+						if ($(fieldID(x,y)).hasClass("black")) {
+							count++;
+						}
+					}
+					if (count % 2 != 0) {
+						pass = false;
+						//console.log("line " + y + ": false");
+					} 
+				}
+					
+				for(x=0; x < 8	; x++) {
+					count = 0;
+					for( y = 0; y < 8; y++) {
+						if ($(fieldID(x,y)).hasClass("black")) {
+							count++;
+						}
+					}
+					if (count % 2 != 0) {
+						pass = false;
+						//console.log("row " + x + ": false");
+					} 
+				}
+				
+				if (pass) {
+					$("#mainDIV").addClass("trueBox");
+					$("#mainDIV").removeClass("falseBox");
+				} else {
+					$("#mainDIV").addClass("falseBox");
+					$("#mainDIV").removeClass("trueBox");
+				}
+			}
+		</script>
+
+	
+	</head>
+	<body>
+		<div id="header">
+			Parity-Zauberei
+		</div>
+		<noscript>
+			Diese Seite benötigt aktiviertes Javascript!
+		</noscript>
+
+		<div id="mainDIV">
+			
+		</div>
+		<button onClick="mix()"><span class="bigicon">↻</span> Neue Runde <span class="bigicon">↻</span></button>
+		<div id="footer">
+			Copyright (c) 2020 T. Roller, License: AGPL<br>
+			Diese Webapp basiert auf einer Idee in: "Abenteuer Informatik" von Jens Gallenbacher, Springer Verlag 2017⁴.
+		</div>
+		
+			<script>
+				for(y=0; y < 8	; y++) {
+					for( x = 0; x < 8; x++) {
+						if (x < 7 && y < 7) {
+							cl = "field";
+						} else {
+							cl = "field round";
+						}
+						$("#mainDIV").append('<div class="'+cl+'" style="left:'+x*45+'px;top:'+y*45+'px;" id="field-'+x+'-'+y+'" onclick="toggle('+x+','+y+')"></div>');
+					}
+				}
+				mix();
+		</script>
+	</body>
+</html>
