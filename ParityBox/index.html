@@ -4,7 +4,8 @@
 	This website / webapp is a simple life editor for PNM-Files. 
 	It has been developed mostly for educational use.
 	Copyright (C) 2020 T. Roller 
-	E-Mail: myLastName@posteo.de
+	E-Mail: myLastName at posteo de
+	Version: 1.0 (06. Jan. 2021)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -28,24 +29,37 @@
 		<script src="../jquery-3.5.1.min.js"></script>
 		<script>
 			function fieldID(x,y) {
+				/* easier access to the identifier for on specific square, 
+				to be used in jQuery-Calls. */
 				return '#field-'+x+'-'+y;
 			}
+			
 			function toggle(x,y, doCheck=true) {
+				/* switch on square from black to white or opposite. 
+				If doCheck is true or not defined, the parity is checked
+				and displayed afterwards.*/
 				$(fieldID(x,y)).toggleClass('black');
 				if (doCheck) {
 					check();
 				}
 			}
+			
 			function mix() {
+				/* create a new valid pattern */
+				
+				// reset all
 				for(y=0; y < 8	; y++) {
 					for( x = 0; x < 8; x++) {
 						$(fieldID(x,y)).removeClass("black");
 					}
 				}
+				
+				// randomly toggle the 7x7-matrix
 				for (i=0; i < 200; i++) {
 					toggle(Math.floor(Math.random()*7), Math.floor(Math.random()*7), false)
 				}
 				
+				// set the parity bits
 				for(y=0; y < 8	; y++) {
 					count = 0;
 					for( x = 0; x < 7; x++) {
@@ -71,7 +85,12 @@
 				}
 				check();
 			}
+			
+		
 			function check() {
+				/* check if the parity is valid and display it by setting 
+				the background color to green or red */
+				
 				pass = true;
 				for(y=0; y < 8	; y++) {
 					count = 0;
@@ -82,7 +101,6 @@
 					}
 					if (count % 2 != 0) {
 						pass = false;
-						//console.log("line " + y + ": false");
 					} 
 				}
 					
@@ -95,7 +113,6 @@
 					}
 					if (count % 2 != 0) {
 						pass = false;
-						//console.log("row " + x + ": false");
 					} 
 				}
 				
@@ -130,6 +147,8 @@
 		</div>
 		
 			<script>
+				
+				/* create matrix, each square gets a unique id "field-X-Y" */
 				for(y=0; y < 8	; y++) {
 					for( x = 0; x < 8; x++) {
 						if (x < 7 && y < 7) {
