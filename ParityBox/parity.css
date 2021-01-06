@@ -1,8 +1,10 @@
+/* CSS file specific for "parity box"
+ * Version: 1.0 (06. Jan. 2021)
+ * T. Roller */
+
 #header, #footer {
 	width: 400px;
 }
-
-
 
 #mainDIV {
 	margin: 8px;
@@ -11,10 +13,12 @@
 	line-height: 0;
 	
 }
-.falseBox {
+
+.falseBox { /* parity check failed */
 	background: red;
 }
-.trueBox {
+
+.trueBox { /* parity check successful */
 	background: #00aa00;
 }
 

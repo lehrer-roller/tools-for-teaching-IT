@@ -1,3 +1,8 @@
+/* CSS file specific for "pnmEdit"
+ * Version: 1.0 (06. Jan. 2021)
+ * T. Roller */
+
+
 #header {
 	border-radius: 10px 0px 0px 0px;
 	height: 35px;
@@ -9,7 +14,7 @@
 	padding: 5px 0px;
 }
 
-#left {
+#left { 
 	position: absolute;
 	left: 10px;
 	top: 10px;
@@ -80,16 +85,16 @@
 	z-index: 3;
 	}
 
-#buttonArea ul {
+#buttonArea ul { /* main buttons */
 	list-style: none;
 }
 
-#buttonArea ul ul {
+#buttonArea ul ul { /* example submenu */
 	list-style: none;
 	display: none;
 }
 
-#buttonArea ul li.activated > ul { /*Liste aktiviert*/
+#buttonArea ul li.activated > ul { /*submenu activated*/
 	display: block;
 	width: 216px;
 	position: relative;
@@ -98,14 +103,14 @@
 	float: left;
 	list-style: none;
 	background-color: lightgrey;
-	padding: 0px; /*seitliches Padding des Hauptmenüs ausschalten*/
+	padding: 0px; 
 	border-style: solid;
 	border-width: 3px;
 	border-color: blue;
 	
 }
 
-#buttonArea ul li.activated ul li {
+#buttonArea ul li.activated ul li { /* submenu items */
 	display: inline-block;
 	margin: 3px;
 	height: 64px;

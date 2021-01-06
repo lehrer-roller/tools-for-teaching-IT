@@ -1,3 +1,7 @@
+/* standard CSS-file for all HTML-Files
+ * Version: 1.0 (06. Jan. 2021)
+ * T. Roller */
+
 #header, #footer {
 	background: white;
 	color: blue;
