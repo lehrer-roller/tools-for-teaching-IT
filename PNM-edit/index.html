@@ -156,14 +156,19 @@
 						} 
 						$("#analyseRes").html(file.resX + "×" + file.resY);
 						$("#analyseMaxValue").html(file.maxValue);
-						var pixelCount = file.data.length;
-						var pixelExpected = file.resX*file.resY * (file.type== "P3"? 3 : 1);
-						if (pixelCount == pixelExpected) {
+						var pixelCount = (file.data.length /  (file.type== "P3"? 3 : 1));
+						var pixelExpected = file.resX*file.resY ;
+						var pixelDiff = pixelCount-pixelExpected;
+						if (pixelCount % 1 != 0) {
+							pixelCount = pixelCount.toFixed(2); // avoid ugly decimals if one or two color values in P3-format is missing (0.33 or 0.67 pixels)
+							pixelDiff = pixelDiff.toFixed(2);
+						}
+						if (pixelDiff == 0) {
 							$("#analysePixelCount").html(pixelCount + " (OK)");
-						} else if (pixelCount < pixelExpected) {
-							$("#analysePixelCount").html(pixelCount + " (" + (pixelExpected - pixelCount) + " zuwenig)");
+						} else if (pixelDiff < 0) {
+							$("#analysePixelCount").html(pixelCount + " (" + (-pixelDiff) + " zuwenig)");
 						} else {
-							$("#analysePixelCount").html(pixelCount + " (" + (pixelCount - pixelExpected) + " zuviel)");
+							$("#analysePixelCount").html(pixelCount + " (" + (pixelDiff) + " zuviel)");
 						}
 						return true;
 					} else {
