@@ -253,13 +253,7 @@
 			</div>
 			<div id="right" title="Hier wird der Dateiinhalt geschrieben. Probiere es einfach aus oder lade ein Beispiel!">
 				<div id="textArea">
-					<textarea id="textEdit" rows="10" cols ="60" oninput="updateAnalyseArea();" placeholder="Bitte hier den Inhalt der PBM/PGM/PPM/PNM Datei hinein kopieren oder ein Beispiel wählen."><?php
-							$fh = fopen('seasonal.pbm','r');
-							while ($line = fgets($fh)) {
-							  echo($line);
-							}
-							fclose($fh);
-						?></textarea>
+					<textarea id="textEdit" rows="10" cols ="60" oninput="updateAnalyseArea();" placeholder="Bitte hier den Inhalt der PBM/PGM/PPM/PNM Datei hinein kopieren oder ein Beispiel wählen."></textarea>
 				</div>
 				<div id="footer">
 					Copyright (c) 2020 T. Roller, License: AGPL, CC-BY-SA 4.0 (pictures)<span class="separator"></span><a href="../datenschutz.html">Datenschutz</a>
@@ -267,6 +261,18 @@
 			</div>
 			
 			<script>
+				// source: https://wiki.selfhtml.org/wiki/JavaScript/XMLHttpRequest
+				var request = new XMLHttpRequest();
+				request.open("GET","./seasonal.pbm");
+				request.addEventListener('load', function(event) {
+				   if (request.status >= 200 && request.status < 300) {
+					  $('#textEdit').html(request.responseText);
+				   } else {
+					  console.warn(request.statusText, request.responseText);
+				   }
+				});
+				request.send();
+				
 				if (updateAnalyseArea()) redraw();
 			</script>
 			
