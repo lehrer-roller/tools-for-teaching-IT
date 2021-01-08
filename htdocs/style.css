@@ -1,0 +1,60 @@
+/* standard CSS-file for all HTML-Files
+ * Version: 1.0 (06. Jan. 2021)
+ * T. Roller */
+
+#header, #footer {
+	background: white;
+	color: blue;
+	border-style: solid;
+	border-width: 3px;
+	border-color: blue;
+	
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#header {
+	padding: 5px;
+	border-radius: 10px 10px 0px 0px;
+	font-size: 30px;
+}
+
+#footer {
+	padding: 5px;
+	font-size: 15px;
+	border-radius: 0px 0px 10px 10px;
+	margin-bottom: 0px
+}
+
+#footer span.separator {
+	width: 30px;
+	display: inline-block;
+	}
+
+
+button {
+	padding: 10px;
+	background: lightgrey;
+	color: black;
+	font-size: 20px;
+	border-color: blue;
+	border-style: solid;
+	border-width: 3px;
+}
+
+button .bigicon {
+	font-size: 30px;
+}
+
+
+button:active {
+	border-color: lightblue;
+	background: gray;
+}
+
+
+
+noscript {
+	color: red;
+	font-size: 50px;
+}

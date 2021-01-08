@@ -1,0 +1,42 @@
+/* CSS file specific for "parity box"
+ * Version: 1.0 (06. Jan. 2021)
+ * T. Roller */
+
+#header, #footer {
+	width: 400px;
+}
+
+#mainDIV {
+	margin: 8px;
+	width: 400px;
+	height: 400px;
+	line-height: 0;
+	
+}
+
+.falseBox { /* parity check failed */
+	background: red;
+}
+
+.trueBox { /* parity check successful */
+	background: #00aa00;
+}
+
+.field {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin: 5px;
+	background: white;
+}
+.black {
+	background: black;
+}	
+.round {
+	border-radius: 20px;
+}
+
+button {
+	width: 300px;
+	margin: 0px 60px 10px 60px;
+}
