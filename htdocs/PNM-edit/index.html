@@ -27,6 +27,7 @@
 			<link rel="stylesheet" href="./pnm-edit.css" type="text/css">
 			<script src="../jquery-3.5.1.min.js"></script>
 			<script>
+				var timerAfterEdit;
 				function loadExample(ex) {
 					/* load one of three pre-defined examples */
 					var example = [
@@ -48,6 +49,8 @@
 				function redraw() {
 					/* redraw the image adjusting the pixel size to fill
 					the canvas (maximum zoom)*/
+					$("#redrawButton").removeClass("blink");
+					
 					var file = readFile();
 					if (!file) {
 						window.alert("Konnte Dateiformat nicht erkennen. Es sind nur die ASCII-Formate von PBM-, PGM- und PPM-Dateien implementiert (Typen P1, P2 und P3).");
@@ -139,6 +142,25 @@
 						return false;
 					}
 					return file;
+				}
+				
+				function blinkDrawButton() {
+					$("#redrawButton").addClass("blink");
+					//$("#redrawButton").removeClass("blink");
+					console.log("blink");
+					
+				}	
+				
+				function onTextUpdate() {
+					// reset timer for blinking event of redraw button					
+					if (timerAfterEdit) {
+						window.clearTimeout(timerAfterEdit);
+					}
+					
+					if (updateAnalyseArea()) { // only trigger blink if data is valid
+						timerAfterEdit = window.setTimeout(blinkDrawButton, 3000);
+					}
+					
 				}
 				
 				function updateAnalyseArea() {
@@ -253,7 +275,7 @@
 			</div>
 			<div id="right" title="Hier wird der Dateiinhalt geschrieben. Probiere es einfach aus oder lade ein Beispiel!">
 				<div id="textArea">
-					<textarea id="textEdit" rows="10" cols ="60" oninput="updateAnalyseArea();" placeholder="Bitte hier den Inhalt der PBM/PGM/PPM/PNM Datei hinein kopieren oder ein Beispiel wählen."></textarea>
+					<textarea id="textEdit" rows="10" cols ="60" oninput="onTextUpdate();" placeholder="Bitte hier den Inhalt der PBM/PGM/PPM/PNM Datei hinein kopieren oder ein Beispiel wählen."></textarea>
 				</div>
 				<div id="footer">
 					Copyright (c) 2020 T. Roller, License: AGPL, CC-BY-SA 4.0 (pictures)<span class="separator"></span><a href="../datenschutz.html">Datenschutz</a>
@@ -270,10 +292,11 @@
 				   } else {
 					  console.warn(request.statusText, request.responseText);
 				   }
+				   if (updateAnalyseArea()) redraw();
 				});
 				request.send();
 				
-				if (updateAnalyseArea()) redraw();
+				
 			</script>
 			
 		</body>
