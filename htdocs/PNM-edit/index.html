@@ -26,6 +26,9 @@
 			<link rel="stylesheet" href="../style.css" type="text/css">
 			<link rel="stylesheet" href="./pnm-edit.css" type="text/css">
 			<script src="../jquery-3.5.1.min.js"></script>
+                        <script src="./shareLink.js"></script>
+                        <script src="./pako.js"></script>
+                      
 			<script>
 				var timerAfterEdit;
 				function loadExample(ex) {
@@ -109,7 +112,7 @@
 							drawFunction(x,y,data);
 						}
 					}
-		
+                                        console.log(createShareLink());
 				}
 				
 				function readFile() {
@@ -234,7 +237,44 @@
 					fr.onerror = function() {
 						console.log(fr.error);
 					};
-				}
+                                }
+                                
+                                function createShareLink() {
+                                    var b64Str = textZToB64($("#textEdit").val());
+                                    return window.location.toString().split("?")[0] + "?img=" + b64Str;
+                                }
+                                
+                                function readShareLink() {
+                                    // check if the page was called with an img-String as parameter
+                                    // as created by sharelinks, and draw this img. 
+                                    // return true if this was successful, false if not.
+                                    var query = window.location.search.toString();
+                                    var matches = query.match(/[?&]img=([a-zA-Z0-9+/=]*)/);
+                                    if (matches) {
+                                        img = matches[1];
+                                        $("#textEdit").val(b64ToUzText(img));
+                                        redraw();
+                                        return(true);                                    
+                                    }
+                                    return(false);
+                                }
+                                
+                                function readSeasonal() {
+                                    // read a seasonal example file from the server
+                                    // does not work on file:/-protocol.
+                                    // source: https://wiki.selfhtml.org/wiki/JavaScript/XMLHttpRequest
+                                    var request = new XMLHttpRequest();
+                                    request.open("GET","./seasonal.pbm");
+                                    request.addEventListener('load', function(event) {
+                                       if (request.status >= 200 && request.status < 300) {
+                                              $('#textEdit').html(request.responseText);
+                                       } else {
+                                              console.warn(request.statusText, request.responseText);
+                                       }
+                                       if (updateAnalyseArea()) redraw();
+                                    });
+                                    request.send();
+                                }
 			</script>
 
 		
@@ -283,30 +323,14 @@
 			</div>
 			
 			<script>
-				// source: https://wiki.selfhtml.org/wiki/JavaScript/XMLHttpRequest
-				var request = new XMLHttpRequest();
-				request.open("GET","./seasonal.pbm");
-				request.addEventListener('load', function(event) {
-				   if (request.status >= 200 && request.status < 300) {
-					  $('#textEdit').html(request.responseText);
-				   } else {
-					  console.warn(request.statusText, request.responseText);
-				   }
-				   if (updateAnalyseArea()) redraw();
-				});
-				request.send();
+                            if (!readShareLink()) {
+                                readSeasonal();
+                            }
 				
 				
 			</script>
                         
-                        <script src="./shareLink.js"></script>
-                        <script type="text/javascript">
-                            // testing stage for shareLink.js
-                            original = new Uint8Array([68, 78, 32, 120]);
-                            console.log(original);
-                            console.log(arrayToB64(original));
-                            console.log(b64ToArray(arrayToB64(original)));
-                        </script>
+                       
 			
 		</body>
 	</html>

@@ -22,6 +22,18 @@
 
 const b64lookup = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
+function textZToB64(text) {
+    // zip-compress a text and base64-encode it
+    return arrayToB64(pako.deflate(text));
+}
+
+function b64ToUzText(b64str) {
+    // base64 decode and unzip text
+    td = new TextDecoder();
+    return td.decode(pako.inflate(b64ToArray(b64str)));
+    
+}
+
 function arrayToB64 (original) {
     // convert a Uint8Array to a base64-String
     var paddedLength = Math.ceil(original.length / 3)*3; // pad length to next divisible by 3
