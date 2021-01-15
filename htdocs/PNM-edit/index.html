@@ -149,9 +149,6 @@
 				
 				function blinkDrawButton() {
 					$("#redrawButton").addClass("blink");
-					//$("#redrawButton").removeClass("blink");
-					console.log("blink");
-					
 				}	
 				
 				function onTextUpdate() {
@@ -259,6 +256,11 @@
                                     return(false);
                                 }
                                 
+                                function share() {
+                                    $("#shareDialog").addClass("activated");
+                                    $("#linkText").val(createShareLink());
+                                }
+                                
                                 function readSeasonal() {
                                     // read a seasonal example file from the server
                                     // does not work on file:/-protocol.
@@ -303,8 +305,14 @@
 						</li>
 						<li id="uploadButton" 	class="imgButton" onclick="uploadClicked();" title="Datei öffnen"><img src="./open.png"/></li>
 						<li id="downloadButton" class="imgButton" onclick="download();" 	 title="Datei speichern/herunterladen"><img src="./save.png"/></li>
+                                                <li id="shareButton"    class="imgButton" onclick="share();"             title="Bild als Link oder QR-Code teilen"><img src="./share.png"/></li>
+                                                    
+                                                
 						<li id="redrawButton" 	class="imgButton" onclick="redraw();" 		 title="neu zeichnen"><img src="./redraw.png"/></li>
 					</ul>
+                                        <div id="shareDialog" hidden>
+                                            <textarea readonly id="linkText"/></textarea><button id="copyButton">kopieren</button>
+                                                    </div>
 				</div>
 				<div id="analyseArea" title="Hier werden die ausgelesenen Kopfdaten des Bilds gezeigt.">
 					<p>Format: <span id="analyseFormat" class="analyseValue"></span></p>
@@ -321,7 +329,7 @@
 					Copyright (c) 2020 T. Roller, License: AGPL, CC-BY-SA 4.0 (pictures)<span class="separator"></span><a href="../datenschutz.html">Datenschutz</a>
 				</div>
 			</div>
-			
+                        
 			<script>
                             if (!readShareLink()) {
                                 readSeasonal();
