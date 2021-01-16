@@ -27,7 +27,8 @@
 			<link rel="stylesheet" href="./pnm-edit.css" type="text/css">
 			<script src="../jquery-3.5.1.min.js"></script>
                         <script src="./shareLink.js"></script>
-                        <script src="./pako.js"></script>
+                        <script src="./pako.min.js"></script>
+                        <script src="./qrcode.min.js"></script>
                       
 			<script>
 				var timerAfterEdit;
@@ -258,7 +259,26 @@
                                 
                                 function share() {
                                     $("#shareDialog").addClass("activated");
-                                    $("#linkText").val(createShareLink());
+                                    var link = createShareLink();
+                                    $("#linkText").val(link);
+                                    $("#qrcode").html("");
+                                    new QRCode($("#qrcode").get(0),  {
+                                        text: link,
+                                        width: 280,
+                                        height: 280,
+                                        colorDark : "#000000",
+                                        colorLight : "#ffffff",
+                                        correctLevel : QRCode.CorrectLevel.L
+                                    });
+                                }
+                                
+                                function shareCopy() {
+                                    $("#linkText").select();
+                                    document.execCommand("copy");
+                                }
+                                
+                                function closeShare() {
+                                    $("#shareDialog").removeClass("activated");
                                 }
                                 
                                 function readSeasonal() {
@@ -311,8 +331,15 @@
 						<li id="redrawButton" 	class="imgButton" onclick="redraw();" 		 title="neu zeichnen"><img src="./redraw.png"/></li>
 					</ul>
                                         <div id="shareDialog" hidden>
-                                            <textarea readonly id="linkText"/></textarea><button id="copyButton">kopieren</button>
-                                                    </div>
+                                                <div id="qrcode" ></div>
+                                                
+                                                <button id="copyButton" onclick="shareCopy()"><img src="./copy.png"/></button>
+                                                <button id="closeDialogButton" onclick="closeShare()"><img src="./close.png"/></button>
+                                               
+                                                <textarea readonly id="linkText"/></textarea>
+                                               
+                                 
+                                        </div>
 				</div>
 				<div id="analyseArea" title="Hier werden die ausgelesenen Kopfdaten des Bilds gezeigt.">
 					<p>Format: <span id="analyseFormat" class="analyseValue"></span></p>
@@ -326,7 +353,7 @@
 					<textarea id="textEdit" rows="10" cols ="60" oninput="onTextUpdate();" placeholder="Bitte hier den Inhalt der PBM/PGM/PPM/PNM Datei hinein kopieren oder ein Beispiel wählen."></textarea>
 				</div>
 				<div id="footer">
-					Copyright (c) 2020 T. Roller, License: AGPL, CC-BY-SA 4.0 (pictures)<span class="separator"></span><a href="../datenschutz.html">Datenschutz</a>
+                                    Copyright (c) 2020 T. Roller and others, see <a href="https://github.com/lehrer-roller/tools-for-teaching-IT/blob/shareLink/LICENSE.md">License information</a>, <span class="separator"></span><a href="../datenschutz.html">Datenschutz</a>
 				</div>
 			</div>
                         
